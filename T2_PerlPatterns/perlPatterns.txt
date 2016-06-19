@@ -1,0 +1,122 @@
+#____________________________________________________________________
+# run program
+perl ~/myprog.pl
+
+# alternatively use as first program line ('which perl')
+#! /usr/bin/perl -w
+# and make it executable
+chmod u+x myprog.pl
+
+#____________________________________________________________________
+# program repository
+http://www.cpan.org/
+
+http://search.cpan.org/search?query=bioperl&mode=all
+
+http://www.perl.com
+
+#____________________________________________________________________
+# string concatenation
+$DNA1 = 'ATGCGCGTTTTGG';
+$DNA2 = 'GTATTGGTACATAC'; 
+$DNA3 = $DNA1 . $DNA2;
+print("$DNA3\n");
+print("$DNA1$DNA2\n");
+
+#____________________________________________________________________
+# substring
+$DNA4 = substr($DNA1, 3, 5); # at position 3, 5 characters long
+
+#____________________________________________________________________
+# array
+@bases = ('A', 'C', 'G', 'T');
+print("$bases[1]\n");
+
+#____________________________________________________________________
+# multi-dimension 
+$m2[3][4] = 4.5;
+
+#____________________________________________________________________
+# hash table
+%aa = ('ALA' => 65,
+       'CYS' => 67,
+       'ASP' => 68);
+
+$resname = 'ALA';
+$ascii = $aa{$resname};
+
+#____________________________________________________________________
+# subroutine
+&testsub();
+
+sub testsub {
+	my $message = "Hello from testsub";
+	print("$message\n");
+}
+
+#____________________________________________________________________
+# subroutine with parameter passing
+$message = "Hello again from testsub";
+&testsub($message);
+
+sub testsub {
+	$pmessage = $_[0];
+	print("$pmessage\n");
+}
+
+#____________________________________________________________________
+# files
+$infilename = $ARGV[0];
+open(IN, $infilename) || die "Cannot open '$infilename' for reading\n";
+@dat = <IN>;
+close(IN);
+
+#____________________________________________________________________
+# patterns
+while (<IN>) {
+    if ($_ =~ /^(AT)(OM)/) {
+		chomp;
+		$atomname = substr($_,13,3);
+		print("$1\n");
+	}
+}
+
+# meta characters
+\ | () [ { ^ $ * + ? .
+
+# escape
+\
+
+# character group
+()
+
+# character class
+[]
+A-Z
+[A-Za-z0-9]
+
+# quantifiers
+{EXACT}
+{MIN,}
+{MIN,MAX} 
+*  any 
++  {1,}
+? {0,1}
+
+# matched items in ()
+$1 $2 $3 ...
+
+# groups
+\w word 
+\s space
+\d digit
+. any character
+
+# example
+/^\s{5,} (\w{1}) .* (\w{2,6}\s? G)\.T/
+$1 -> \w{1}
+$2 -> \w{2,6}\s? G
+
+
+
+
